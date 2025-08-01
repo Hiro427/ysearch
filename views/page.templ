@@ -1,0 +1,50 @@
+package views
+
+templ Page(nav bool) {
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<title>YGO Card Search</title>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+			<link rel="stylesheet" href="/static/styles.css"/>
+			<link rel="icon" href="/static/assets/favicon.ico" type="image/x-icon"/>
+			<script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.6/dist/htmx.min.js" defer></script>
+			<script src="https://unpkg.com/hyperscript.org@0.9.14"></script>
+			<script src="static/javascript/app.js" defer></script>
+			<script src="static/javascript/archetype.js" defer></script>
+			<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.x.x/dist/cdn.min.js"></script>
+			<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+			<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+		</head>
+		<body class="bg-gray-300 h-screen overflow-hidden" x-init :class="{ dark: $store.theme.dark }">
+			<div class=" bg-gray-100 dark:bg-gray-300 h-full flex flex-col">
+				if nav {
+					<nav class="flex w-full bg-gray-200 text-black dark:bg-gray-600 dark:text-white text-xl p-4 flex-shrink-0">
+						<a href="/" class="ml-2 flex items-start">
+							<span>
+								<img class="w-18 h-10" src="/static/assets/image-removebg-preview.png"/>
+							</span>
+							<span class="ml-1 font-bold text-2xl">YGO Card Search</span>
+						</a>
+						<button class="ml-auto text-black dark:text-white" x-on:click="$store.theme.toggle()">
+							<i class="fa-solid" :class="$store.theme.dark ? 'fa-sun' : 'fa-moon'"></i>
+						</button>
+					</nav>
+				}
+				<main class="flex-1 min-h-0">
+					{ children... }
+				</main>
+				<footer class="bg-gray-400 text-black dark:bg-gray-600 dark:text-white p-4 flex-shrink-0">
+					<p class="flex items-center justify-end">
+						<span class="text-l">Source Code on</span>
+						<a href="https://github.com/Hiro427" class="ml-2">
+							<i class="fa-brands fa-github fa-lg"></i>
+						</a>
+					</p>
+				</footer>
+			</div>
+		</body>
+	</html>
+}

@@ -1,0 +1,10 @@
+build/
+target/
+release/ 
+data_new.json
+data.json
+.pycache
+__pycache__/
+.env
+node_modules/
+tmp/

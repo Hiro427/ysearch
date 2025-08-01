@@ -1,0 +1,11 @@
+package components
+
+import "ysearch/types"
+
+templ CardLists(cards []types.Card) {
+	<ul id="card-grid">
+		for _, c := range(cards) {
+			@CardTile(&c)
+		}
+	</ul>
+}

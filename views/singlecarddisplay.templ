@@ -1,0 +1,200 @@
+package views
+
+import "ysearch/types"
+import "fmt"
+import "strings"
+
+var link string = types.LoadSecret("AWS_CLOUDFRONT_URL")
+
+// Modal template from hyperscript website
+templ SingleCardModal(card []types.Card) {
+	<div id="modal" _="on closeModal add .closing then wait for animationend then remove me">
+		<div class="modal-underlay" _="on click trigger closeModal"></div>
+		<div class="modal-content bg-gray-200 dark:bg-gray-400 border rounded-2xl">
+			<div
+				id="cssportal-grid"
+				class="grid grid-cols-[1fr_2fr] grid-rows-[auto_1fr] w-full h-full gap-2 p-4 relative bg-gray-200 dark:bg-gray-400 border rounded border-transparent"
+			>
+				<div id="div2" class=" ml-2 font-bold text-xl flex justify-center items-center p-2 col-span-2 text-black">
+					<h1>{ fmt.Sprintf("%s", *card[0].Name) }</h1>
+				</div>
+				<div id="div1" class="border rounded border-transparent flex justify-center items-center">
+					<img
+						class="w-full h-full object-contain transition-transform duration-200 hover:z-20 hover:scale-150 hover:shadow-lg"
+						src={ fmt.Sprintf("%s/%d.jpg", link, card[0].SourceID) }
+					/>
+				</div>
+				<div id="div4" class="ml-2 flex flex-col justify-center items-center p-2 overflow-y-auto">
+					<div class="flex flex-wrap items-center mb-2 text-black">
+						if strings.Contains(*card[0].HumanReadableCardType, "Pendulum") {
+							<span class="items-center flex">
+								<img class="w-8 h-4 mr-1" src="/static/assets/ygo_scales.webp"/>
+								{ fmt.Sprintf("%d", *card[0].Scale) }
+							</span>
+						} else if strings.Contains(*card[0].HumanReadableCardType, "Link") {
+							<span>{ fmt.Sprintf("Rating: %d", *card[0].Linkval) }</span>
+						} else if strings.Contains(*card[0].HumanReadableCardType, "Xyz") {
+							<img class="w-4 h-4 mr-1" src="/static/assets/ygo_rank.png"/>
+							<span>{ fmt.Sprintf("%d", *card[0].Level) }</span>
+						} else if strings.Contains(*card[0].HumanReadableCardType, "Spell") {
+							switch t := *card[0].Race; t {
+								case "Quick-Play":
+									<img class="w-4 h-4 mr-2" src="/static/assets/Quick-Play.webp"/>
+								case "Ritual":
+									<img class="w-4 h-4 mr-2" src="/static/assets/Ritual_spell.webp"/>
+								case "Field":
+									<img class="w-4 h-4 mr-2" src="/static/assets/Field_spell.webp"/>
+								case "Continuous":
+									<img class="w-4 h-4 mr-2" src="/static/assets/Continuous.webp"/>
+								case "Equip":
+									<img class="w-4 h-4 mr-2" src="/static/assets/Equip_Spell.webp"/>
+								default:
+									<img class="w-4 h-4 mr-2" src="/static/assets/Normal_spell.svg"/>
+							}
+							<img class="w-4 h-4 mr-1" src="/static/assets/spell.png"/>
+							<span>{ fmt.Sprint("Spell") }</span>
+							<br/>
+						} else if strings.Contains(*card[0].HumanReadableCardType, "Trap") {
+							switch t := *card[0].Race; t {
+								case "Counter":
+									<img class="w-4 h-4 mr-2" src="/static/assets/Counter.webp"/>
+								case "Continuous":
+									<img class="w-4 h-4 mr-2" src="/static/assets/Continuous.webp"/>
+								case "Field":
+									<img class="w-4 h-4 mr-2" src="/static/assets/Field_spell.webp"/>
+								default:
+									<img class="w-4 h-4 mr-2" src="/static/assets/Normal_spell.svg"/>
+							}
+							<img class="w-4 h-4 mr-1" src="/static/assets/Trap.png"/>
+							<span>{ fmt.Sprint("Trap") }</span>
+						} else if strings.Contains(*card[0].HumanReadableCardType, "Token") {
+							<img class="w-4 h-4 mr-1" src="/static/assets/token.png"/>
+							<span>{ fmt.Sprintf("%s/%s", *card[0].Race, *card[0].HumanReadableCardType) }</span>
+						} else {
+							<img class="w-4 h-4 mr-1" src="/static/assets/ygo_level.png"/>
+							<span>{ fmt.Sprintf("%d", *card[0].Level) }</span>
+						}
+						if strings.Contains(*card[0].HumanReadableCardType, "Monster") {
+							<span class="text-m pb-1 text-left w-full">
+								{ fmt.Sprintf("%s/%s", *card[0].Attribute, *card[0].Race) }
+							</span>
+							<span class="text-m pb-1 text-left w-full">
+								{ fmt.Sprintf("%s", *card[0].HumanReadableCardType) }
+							</span>
+						}
+						<br/>
+						<p class="text-sm whitespace-pre-wrap w-full">
+							{ fmt.Sprintf("%s", *card[0].Desc) }
+						</p>
+					</div>
+				</div>
+			</div>
+			<br/>
+			<br/>
+		</div>
+	</div>
+	<style>
+  #modal {
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    animation-name: fadeIn;
+    animation-duration: 150ms;
+    animation-timing-function: ease;
+  }
+
+  #modal>.modal-underlay {
+    position: absolute;
+    z-index: -1;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+  }
+
+  #modal>.modal-content {
+    margin-top: 10vh;
+    font-family: sans-serif;
+
+
+    min-width: 300px;
+    max-width: 750px;
+    max-height: 550px;
+    min-height: 200px;
+    width: fit-content;
+    height: fit-content;
+
+
+    border: solid 1px #999;
+    border-radius: 8px;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    color: white;
+
+    animation-name: zoomIn;
+    animation-duration: 150ms;
+    animation-timing-function: ease;
+  }
+
+  #modal.closing {
+    animation-name: fadeOut;
+    animation-duration: 150ms;
+    animation-timing-function: ease;
+  }
+
+  #modal.closing>.modal-content {
+    animation-name: zoomOut;
+    animation-duration: 150ms;
+    animation-timing-function: ease;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes zoomIn {
+    0% {
+      transform: scale(0.9);
+    }
+
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes zoomOut {
+    0% {
+      transform: scale(1);
+    }
+
+    100% {
+      transform: scale(0.9);
+    }
+  }
+</style>
+}

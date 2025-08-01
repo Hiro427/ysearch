@@ -1,0 +1,26 @@
+package components
+
+import (
+	"fmt"
+	"ysearch/types"
+)
+
+var link string = types.LoadSecret("AWS_CLOUDFRONT_URL")
+
+templ CardTile(card *types.Card) {
+	<a
+		hx-get={ fmt.Sprintf("/search/singlecard?id=%d", card.SourceID) }
+		hx-target="body"
+		hx-swap="beforeend"
+		hx-trigger="click"
+		hx-preventDefault="true"
+	>
+		<img
+			id={ fmt.Sprintf("%d", card.SourceID) }
+			src={ fmt.Sprintf("%s/%d.jpg", link, card.SourceID) }
+			alt={ fmt.Sprintf("%s", *card.Name) }
+			loading="lazy"
+			class=""
+		/>
+	</a>
+}

@@ -1,0 +1,7 @@
+build
+target
+release
+.pycache
+__pycache__
+.env
+node_modules
