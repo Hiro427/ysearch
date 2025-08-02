@@ -47,7 +47,7 @@ func Page(nav bool) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</main><footer class=\"bg-gray-400 text-black dark:bg-gray-600 dark:text-white p-4 flex-shrink-0\"><p class=\"flex items-center justify-end\"><span class=\"text-l\">Source Code on</span> <a href=\"https://github.com/Hiro427\" class=\"ml-2\"><i class=\"fa-brands fa-github fa-lg\"></i></a></p></footer></div></body></html>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</main><footer class=\"bg-gray-400 text-black dark:bg-gray-600 dark:text-white p-4 flex-shrink-0\"><p class=\"flex items-center justify-end\"><span class=\"text-l\">Source Code on</span> <a href=\"https://github.com/Hiro427/ysearch\" class=\"ml-2\"><i class=\"fa-brands fa-github fa-lg\"></i></a></p></footer></div></body></html>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
