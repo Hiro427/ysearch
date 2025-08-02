@@ -12,8 +12,8 @@ import (
 )
 
 func SingleSearchCards(ctx context.Context, db *pgxpool.Pool, sql string, id string) ([]types.Card, error) {
-	fmt.Println("Single SearchCards called")
-	fmt.Println("SQL:", sql)
+	// fmt.Println("Single SearchCards called")
+	// fmt.Println("SQL:", sql)
 
 	rows, err := db.Query(ctx, sql, id)
 	if err != nil {
@@ -22,7 +22,7 @@ func SingleSearchCards(ctx context.Context, db *pgxpool.Pool, sql string, id str
 	}
 	defer rows.Close() // Always close rows
 
-	fmt.Println("Query completed")
+	// fmt.Println("Query completed")
 
 	var cards []types.Card
 	for rows.Next() {
@@ -55,6 +55,6 @@ func SingleSearchCards(ctx context.Context, db *pgxpool.Pool, sql string, id str
 		return nil, err
 	}
 
-	fmt.Printf("Found %d cards\n", len(cards))
+	// fmt.Printf("Found %d cards\n", len(cards))
 	return cards, nil
 }
