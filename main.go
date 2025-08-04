@@ -9,7 +9,6 @@ import (
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
 
-	"fmt"
 	"ysearch/handlers"
 	"ysearch/storage"
 	"ysearch/types"
@@ -18,8 +17,6 @@ import (
 func main() {
 	var db *pgxpool.Pool
 	conn := types.LoadSecret("DATABASE_URL")
-
-	fmt.Printf("Connecting to database with URL: %s\n", conn)
 
 	config, err := pgxpool.ParseConfig(conn)
 	if err != nil {
