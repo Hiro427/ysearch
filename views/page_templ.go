@@ -47,7 +47,7 @@ func Page(nav bool) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</main><footer class=\"bg-gray-400 text-black dark:bg-gray-600 dark:text-white p-4 flex-shrink-0\"><p class=\"flex items-center justify-end\"><span class=\"text-l\">Source Code on</span> <a href=\"https://github.com/Hiro427/ysearch\" class=\"ml-2\"><i class=\"fa-brands fa-github fa-lg\"></i></a></p></footer></div></body></html>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</main><footer class=\"bg-gray-400 text-black dark:bg-gray-600 dark:text-white p-4 flex-shrink-0\"><p class=\"flex items-center justify-end\"><span class=\"text-l\">Source Code on</span> <a href=\"https://github.com/Hiro427/ysearch\" class=\"ml-2\"><i class=\"fa-brands fa-github fa-lg\"></i></a></p></footer></div></body></html><!-- Google tag (gtag.js) --><script async src=\"https://www.googletagmanager.com/gtag/js?id=G-YHKV864XDZ\"></script><script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag() {dataLayer.push(arguments);}\n  gtag('js', new Date());\n\n  gtag('config', 'G-YHKV864XDZ');\n</script>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
