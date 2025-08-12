@@ -7,6 +7,7 @@ import (
 
 var link string = types.LoadSecret("AWS_CLOUDFRONT_URL")
 
+// TODO: Start working on new Card Tile Layout
 templ CardTile(card *types.Card) {
 	<a
 		hx-get={ fmt.Sprintf("/search/singlecard?id=%d", card.SourceID) }

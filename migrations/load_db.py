@@ -21,6 +21,8 @@ conn = psycopg.connect(os.environ["INSERT_DATABASE_URL"])
 
 cur = conn.cursor()
 
+
+
 cur.execute("""
     CREATE TABLE IF NOT EXISTS all_cards_search (
         source_id INT NOT NULL, 
@@ -61,6 +63,7 @@ class Card:
     linkmarkers: List[str] = field(default_factory=list)
     banlist_info: Optional[Dict[str, str]] = None
 
+    # NOTE: Need new API response data from ?misc=yes endpoint
     #not using these
     type: str = "None"
     typeline:List[str] = field(default_factory=list) 
@@ -108,7 +111,8 @@ for card in data[::]:
         continue 
     else: 
         c.insertDefaultMonsters()  
-        #TODO: Make this a class function 'c.UploadToS3'
+        # TODO: Make this a class function 'c.UploadToS3' 
+        # NOTE: Get cropped images from API > S3
         image_url = card["card_images"][0]["image_url"]
         filename = image_url.split("/")[-1]
         response = requests.get(image_url, stream=True)

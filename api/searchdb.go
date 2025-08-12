@@ -12,8 +12,8 @@ import (
 )
 
 func SearchCards(ctx context.Context, db *pgxpool.Pool, sql string, args []any) ([]types.Card, error) {
-	// fmt.Println("SearchCards called")
 	// fmt.Println("SQL:", sql)
+	// fmt.Println("SearchCards called")
 	// fmt.Println("Args:", args)
 
 	rows, err := db.Query(ctx, sql, args...)

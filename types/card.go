@@ -6,6 +6,7 @@ import (
 	"os"
 )
 
+// TODO: Move to utils package
 func LoadSecret(env string) string {
 	var res string
 	if os.Getenv(env) == "" {
